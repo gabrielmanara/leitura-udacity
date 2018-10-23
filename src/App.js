@@ -1,26 +1,34 @@
 import React, { Component } from 'react';
-import logo from './logo.svg';
-import './App.css';
+import Header from 'components/l-header';
+import styled, { createGlobalStyle } from 'styled-components';
+import Posters from "containers/Posters";
+import styledNormalize from 'styled-normalize';
+
+import { BrowserRouter as Router, Route, Link } from "react-router-dom";
+
+const GlobalStyle = createGlobalStyle`
+  ${styledNormalize}
+  @import url('https://fonts.googleapis.com/css?family=PT+Sans+Caption');
+
+  body {
+    font-family: 'PT Sans Caption', sans-serif;
+  }
+`;
+
+const Content = styled.div`
+  max-width: 768px;
+  padding: 1em;
+`;
 
 class App extends Component {
   render() {
     return (
-      <div className="App">
-        <header className="App-header">
-          <img src={logo} className="App-logo" alt="logo" />
-          <p>
-            Edit <code>src/App.js</code> and save to reload.
-          </p>
-          <a
-            className="App-link"
-            href="https://reactjs.org"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Learn React
-          </a>
-        </header>
-      </div>
+      <Content>
+        <GlobalStyle />
+        <Router>
+          <Route exact path="/" component={Posters} />
+        </Router>
+      </Content>
     );
   }
 }

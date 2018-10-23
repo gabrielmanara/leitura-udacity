@@ -28,6 +28,12 @@ const Info = styled.h4`
   position: relative;
   color: ${props => props.theme.textColor.text};
 
+  &:last-of-type {
+    &:after {
+      display: none;
+    }
+  }
+
   &:after {
     content: "";
     width: 10px;
@@ -43,6 +49,11 @@ const Info = styled.h4`
 `;
 
 export default class Card extends Component {
+  converDate = (timestamp) => {
+    const date = new Date(timestamp);
+    return date.toLocaleDateString()
+  };
+
   render() {
     const { post } = this.props;
     return (
@@ -55,6 +66,7 @@ export default class Card extends Component {
           <Info>{post.author}</Info>
           <Info>{post.category}</Info>
           <Info>{post.commentCount} comments</Info>
+          <Info>{this.converDate(post.timestamp)}</Info>
         </Details>
       </Post>
     )

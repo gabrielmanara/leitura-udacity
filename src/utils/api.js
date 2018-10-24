@@ -12,4 +12,14 @@ const headers = {
 
 export const getPosts = () =>
   fetch(`${api}/posts`, { headers })
-    .then(res => res.json())
+    .then(response => response.json())
+
+export const vote = ({ id, vote }) =>
+  fetch(`${api}/posts/${id}`, {
+    method: 'POST',
+    headers: {
+      ...headers,
+      'Content-Type': 'application/json',
+    },
+    body: JSON.stringify(vote)
+  }).then(response => response.json())

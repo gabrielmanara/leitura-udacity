@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import styled from "styled-components";
+import Vote from "components/btn-vote";
 
 const Post = styled.article`
   margin-bottom: 25px;
@@ -7,7 +8,9 @@ const Post = styled.article`
 
 const Title = styled.h2`
   font-weight: bold;
+  display: flex;
   font-size: 18px;
+  align-items: center;
 `;
 
 const Link = styled.a`
@@ -60,6 +63,9 @@ export default class Card extends Component {
       <Post>
         <Title>
           <Link href="#">{post.title}</Link>
+          <Vote
+            id={post.id} 
+            handleClick={this.props.votePost} />
         </Title>
         <Details>
           <Info>{post.voteScore} points</Info>

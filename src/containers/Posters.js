@@ -9,6 +9,13 @@ class Posters extends Component {
     listOfPosts: []
   }
 
+  votePost = (type, id) => {
+    this.props.handleVote({
+      id: id,
+      vote: { option: type }
+    })
+  }
+
   componentDidMount() {
     this.props.fetchAllPosts();
   };
@@ -23,13 +30,13 @@ class Posters extends Component {
   renderCards = () => {
     const { listOfPosts } = this.state;
     return Object.keys(listOfPosts).map((key) => {
-      return <Card post={listOfPosts[key]} />
+      return <Card
+        votePost={this.votePost}
+        post={listOfPosts[key]} />
     })
   }
 
   render() {
-
-    const { allPosts } = this.props;
     return (
       <div>
         Posters list

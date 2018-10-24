@@ -16,8 +16,6 @@ const store = createStore(
   )
 );
 
-
-
 ReactDOM.render(
   <Provider store={store}>
     <ThemeProvider theme={lightTheme}>

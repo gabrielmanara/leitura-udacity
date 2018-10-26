@@ -6,7 +6,7 @@ import Card from "components/card-post";
 class Posters extends Component {
 
   state = {
-    listOfPosts: []
+    listOfPosts: {}
   }
 
   votePost = (type, id) => {
@@ -26,21 +26,46 @@ class Posters extends Component {
     });
   };
 
+  applyFilters(posts) {
+    // Filter by category if it's needed
+    const { category } = this.props.match.params;
+    
+    if (typeof category !== 'undefined') {
+      posts = Object.keys(posts)
+        .filter(post => {
+          return posts[post].category === category
+        })
+        .reduce((obj, key) => {
+          return {
+            ...obj,
+            [key]: posts[key]
+          };
+        }, {});
+    }
+
+    return posts;
+  }
 
   renderCards = () => {
-    const { listOfPosts } = this.state;
-    return Object.keys(listOfPosts).map((key) => {
+    const posts = this.applyFilters(this.state.listOfPosts);
+
+    return Object.keys(posts).map((key) => {
       return <Card
+        key={key}
         votePost={this.votePost}
-        post={listOfPosts[key]} />
+        post={posts[key]} />
     })
   }
 
   render() {
     return (
       <div>
-        Posters list
-        {this.renderCards()}
+        {this.renderCards().length > 0 && this.renderCards()}
+        {!this.renderCards().length > 0 && 
+          (
+            <div>No posts related with this category</div>
+          )
+        }
       </div>
     )
   }
@@ -48,7 +73,7 @@ class Posters extends Component {
 
 const mapStateToProps = state => {
   return {
-    allPosts: state.posts
+    allPosts: state.posts.allPosts
   }
 }
 

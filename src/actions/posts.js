@@ -2,9 +2,9 @@ import { getPosts, vote } from 'utils/api';
 export const SET_ALL_POSTS = 'SET_ALL_POSTS';
 export const VOTE_POST = 'VOTE_POST';
 
-export function fetchAllPosts() {
+export function fetchAllPosts(category) {
   return (dispatch) => {
-    return getPosts()
+    return getPosts(category)
       .then((posts) => {
         const postsToObject = (posts) =>
           posts.reduce((obj, item) => {

@@ -10,8 +10,14 @@ const headers = {
   'Authorization': token
 }
 
-export const getPosts = () =>
-  fetch(`${api}/posts`, { headers })
+export const getPosts = () => {
+  return fetch(`${api}/posts`, { headers })
+    .then(response => response.json())
+}
+  
+
+export const getCategories = () =>
+  fetch(`${api}/categories`, { headers })
     .then(response => response.json())
 
 export const vote = ({ id, vote }) =>

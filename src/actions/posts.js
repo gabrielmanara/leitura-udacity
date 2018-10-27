@@ -8,9 +8,8 @@ export function fetchAllPosts() {
   return (dispatch) => {
     return getPosts()
       .then((posts) => {
-        const postsToObject = toObject(posts);
-        
-        dispatch(setAllPosts(postsToObject(posts)));
+      
+        dispatch(setAllPosts(toObject(posts)));
       });
   }
 }

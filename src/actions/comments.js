@@ -7,8 +7,7 @@ export function fetchComments(id) {
   return (dispatch) => {
     return getComments(id)
       .then((comments) => {
-        const commentsToObject = toObject(comments);
-        dispatch(setAllComments(commentsToObject));
+        dispatch(setAllComments(toObject(comments)));
       });
   }
 }

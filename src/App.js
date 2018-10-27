@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
 import styled, { createGlobalStyle } from 'styled-components';
 import Posters from "containers/Posters";
+import Post from "containers/Post";
 import styledNormalize from 'styled-normalize';
-import Categories from "containers/Categories"
 import { connect } from "react-redux";
 import * as actionCreators from 'actions/categories';
 
@@ -15,10 +15,6 @@ const GlobalStyle = createGlobalStyle`
   body {
     font-family: 'PT Sans Caption', sans-serif;
   }
-`;
-
-const Content = styled.div`
-  max-width: 768px;
 `;
 
 const Wrapper = styled.div`
@@ -44,7 +40,7 @@ const ItemLink = styled.div`
   }
 
   .selected {
-    color: red;
+    border-bottom: solid 2px white;
   }
 `;
 class App extends Component {
@@ -67,10 +63,9 @@ class App extends Component {
     })
   }
   
-  
   render() {
     return (
-      <Content>
+      <div>
         <GlobalStyle />
         <Router>
           <div>
@@ -89,12 +84,13 @@ class App extends Component {
                 <Route exact path={`/category/:category`} render={(props) => (
                   <Posters {...props}/>
                 )} />
+                <Route exact path="/posts/:id" component={Post} />
               </Switch>
             </Wrapper>
             
           </div>
         </Router>
-      </Content>
+      </div>
     );
   }
 }

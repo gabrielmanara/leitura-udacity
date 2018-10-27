@@ -1,80 +1,34 @@
 import React, { Component } from 'react';
+import { converDate } from "utils/helpers";
 import styled from "styled-components";
-import Vote from "components/btn-vote";
 
-const Post = styled.article`
-  margin-bottom: 25px;
+const Title = styled.h1`
+  color: ${props => props.theme.textColor.textDark};
+  padding-bottom: 10px;
+  border-bottom: solid 1px ${props => props.theme.textColor.textDark};
 `;
 
-const Title = styled.h2`
-  font-weight: bold;
-  display: flex;
-  font-size: 18px;
-  align-items: center;
+const InfoWrapper = styled.div`
+  color: ${props => props.theme.textColor.textDark};
 `;
 
-const Link = styled.a`
-  color: ${props => props.theme.textColor.links};
-  text-decoration: none;
-
-  &:hover {
-    color: ${props => props.theme.textColor.linksHover};
-  }
+const Text = styled.p`
+  color: ${props => props.theme.textColor.textDark};
 `;
 
-const Details = styled.div`
-  display: flex;
-`;
-
-const Info = styled.h4`
-  margin: 0 30px 0 0;
-  position: relative;
-  color: ${props => props.theme.textColor.text};
-
-  &:last-of-type {
-    &:after {
-      display: none;
-    }
-  }
-
-  &:after {
-    content: "";
-    width: 10px;
-    height: 10px;
-    position: relative;
-    border-radius: 100%;
-    background: ${props => props.theme.textColor.text};
-    display: inline-block;
-    position: absolute;
-    right: -20px;
-    top: 3px;
-  }
-`;
-
-export default class Card extends Component {
-  converDate = (timestamp) => {
-    const date = new Date(timestamp);
-    return date.toLocaleDateString()
-  };
-
+export default class CardPost extends Component {
   render() {
     const { post } = this.props;
     return (
-      <Post>
-        <Title>
-          <Link href="#">{post.title}</Link>
-          <Vote
-            id={post.id} 
-            handleClick={this.props.votePost} />
-        </Title>
-        <Details>
-          <Info>{post.voteScore} points</Info>
-          <Info>{post.author}</Info>
-          <Info>{post.category}</Info>
-          <Info>{post.commentCount} comments</Info>
-          <Info>{this.converDate(post.timestamp)}</Info>
-        </Details>
-      </Post>
+      <article>
+        <Title>{post.title}</Title>
+        <InfoWrapper>
+          <span>{post.author}</span>
+          <span> | </span>
+          <span>{post.timestamp && converDate(post.timestamp)}</span>
+        </InfoWrapper>
+        <Text>{post.body}</Text>
+      </article>
     )
   }
 }

@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from "react-redux";
 import * as actionCreators from 'actions/posts';
-import Card from "components/card-post";
+import Card from "components/card-short-post";
 
 class Posters extends Component {
 

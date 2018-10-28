@@ -10,6 +10,8 @@ const CommentTitle = styled.div`
 
 const CommentItem = styled.div`
   margin-bottom: 20px;
+  padding-bottom: 10px;
+  border-bottom: solid 2px;
 `;
 
 const CommentBody = styled.div`

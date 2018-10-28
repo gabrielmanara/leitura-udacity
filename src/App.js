@@ -20,6 +20,8 @@ const GlobalStyle = createGlobalStyle`
 const Wrapper = styled.div`
   padding: 1em;
   display: flex;
+  max-width: 920px;
+  margin: auto;
 `;
 
 const Menu = styled.div`

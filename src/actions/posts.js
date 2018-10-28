@@ -1,4 +1,4 @@
-import { getPosts, vote, getPost } from 'utils/api';
+import { getPosts, vote, getPost, newPostAPI } from 'utils/api';
 import { toObject } from 'utils/helpers';
 export const SET_ALL_POSTS = 'SET_ALL_POSTS';
 export const SET_POST = 'SET_POST';
@@ -23,6 +23,14 @@ export function fetchPost(id) {
   }
 }
 
+export function newPost(post) {
+  return (dispatch) => {
+    return newPostAPI(post)
+      .then((post) => {
+        dispatch(setPost(post));
+      });
+  }
+}
 
 export function handleVote(param) {
   return (dispatch) => {

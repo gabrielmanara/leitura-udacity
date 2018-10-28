@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import styled, { createGlobalStyle } from 'styled-components';
 import Posters from "containers/Posters";
 import Post from "containers/Post";
+import PostForm from "containers/PostForm";
 import styledNormalize from 'styled-normalize';
 import { connect } from "react-redux";
 import * as actionCreators from 'actions/categories';
@@ -21,6 +22,7 @@ const Wrapper = styled.div`
   padding: 1em;
   display: flex;
   max-width: 920px;
+  width: 100%;
   margin: auto;
 `;
 
@@ -77,6 +79,9 @@ class App extends Component {
                   <NavLink exact activeClassName="selected" to={`/`}>Home</NavLink>
                 </ItemLink>
                 {this.renderCategories()}
+                <ItemLink>
+                  <NavLink exact activeClassName="selected" to={`/new-post`}>New Post</NavLink>
+                </ItemLink>
               </Wrapper>
             </Menu>
 
@@ -87,6 +92,7 @@ class App extends Component {
                   <Posters {...props}/>
                 )} />
                 <Route exact path="/posts/:id" component={Post} />
+                <Route exact path="/new-post" component={PostForm} />
               </Switch>
             </Wrapper>
             

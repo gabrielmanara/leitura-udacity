@@ -20,6 +20,20 @@ export const getPost = (id) => {
     .then(response => response.json())
 }
 
+export const newPostAPI = (post) => {
+  return fetch(`${api}/posts`, {
+    method: 'POST',
+    headers: {
+      ...headers,
+      "Content-Type": "application/json"
+    },
+    body: JSON.stringify(post)
+  }).then((response) => {
+    console.log(response)
+    return response.json()
+  })
+}
+
 export const getComments = (id) => {
   return fetch(`${api}/posts/${id}/comments`, { headers })
     .then(response => response.json())
@@ -27,7 +41,7 @@ export const getComments = (id) => {
 
 export function updateCommentAPI(id, value) {
 
-  return fetch(`http://localhost:3001/comments/${id}`, {
+  return fetch(`${api}/comments/${id}`, {
     method: 'PUT',
     headers: {
       ...headers,
@@ -41,7 +55,7 @@ export function updateCommentAPI(id, value) {
 }
 
 export function newCommentAPI(params) {
-  return fetch(`http://localhost:3001/comments`, {
+  return fetch(`${api}/comments`, {
     method: 'POST',
     headers: {
       ...headers,
@@ -55,7 +69,7 @@ export function newCommentAPI(params) {
 
 export function voteComment(id, value) {
 
-  return fetch(`http://localhost:3001/comments/${id}`, {
+  return fetch(`${api}/comments/${id}`, {
     method: 'POST',
     headers: {
       ...headers,

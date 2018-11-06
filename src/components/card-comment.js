@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import styled from "styled-components";
 import { converDate } from "utils/helpers";
-import { FaSave } from 'react-icons/fa';
+import { FaSave, FaEdit } from 'react-icons/fa';
 
 const CommentTitle = styled.div`
   margin-bottom: 10px;
@@ -9,9 +9,7 @@ const CommentTitle = styled.div`
 `;
 
 const CommentItem = styled.div`
-  margin-bottom: 20px;
   padding-bottom: 10px;
-  border-bottom: solid 2px;
 `;
 
 const CommentBody = styled.div`
@@ -66,9 +64,10 @@ export default class CardComment extends Component {
     return (
       <CommentItem>
         <CommentTitle>
-          {comment.author} at {converDate(comment.timestamp)}
-          {!editMode && <EditMode onClick={() => this.handleEditMode()}>Edit</EditMode>}
-          {editMode && <EditMode onClick={() => this.saveComment()}><FaSave /> Save</EditMode>}
+          {comment.author} at {converDate(comment.timestamp)} with {comment.voteScore} votes
+          {!editMode && <EditMode onClick={() => this.handleEditMode()}><FaEdit/> Edit</EditMode>}
+          {editMode && <EditMode onClick={() => this.saveComment()}><FaSave/> Save</EditMode>}
+
         </CommentTitle>
         {!editMode && <CommentBody>{comment.body}</CommentBody>}
         {editMode && <CommentEdit 

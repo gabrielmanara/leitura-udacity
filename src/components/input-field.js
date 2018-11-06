@@ -7,6 +7,24 @@ const FormGroup = styled.div`
   flex-direction: column;
   margin-bottom: 20px;
   width: 100%;
+
+  label {
+    margin-bottom: 15px;
+  }
+
+  input,
+  select,
+  textarea {
+    height: 40px;
+    background: transparent;
+    border: 0;
+    box-shadow: 0px 3px 14px 5px rgba(0,0,0,.05);
+  }
+
+  textarea {
+    height: auto;
+    resize: none;
+  }
 `;
 
 export default class InputField extends Component {
@@ -30,6 +48,7 @@ export default class InputField extends Component {
             onChange={(event) => this.props.updateInput(event.target.value, nameKey)}
             name={nameKey}
             value={value}
+            rows="10"
             type="text" />
         }
 

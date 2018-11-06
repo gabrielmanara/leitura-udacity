@@ -4,6 +4,7 @@ import InputField from "components/input-field";
 import { connect } from "react-redux";
 import * as categoriesActions from 'actions/categories';
 import * as postsActions from 'actions/posts';
+import ButtonDefault from "components/btn-default";
 const uuidv4 = require('uuid/v4');
 
 const Form = styled.div`
@@ -76,7 +77,10 @@ class PostForm extends Component {
           updateInput={this.handleChange}
         />
 
-        <button onClick={this.submitPost}>I'm ready to publish</button>
+
+        <ButtonDefault 
+          handle={this.submitPost}
+          title="I'm ready to publish"/>
       </Form>
     )
   }

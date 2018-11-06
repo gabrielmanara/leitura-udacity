@@ -6,6 +6,7 @@ import PostForm from "containers/PostForm";
 import styledNormalize from 'styled-normalize';
 import { connect } from "react-redux";
 import * as actionCreators from 'actions/categories';
+import TheHeader from "components/l-header";
 
 import { BrowserRouter as Router, Route, NavLink, Switch } from "react-router-dom";
 
@@ -24,48 +25,13 @@ const Wrapper = styled.div`
   max-width: 920px;
   width: 100%;
   margin: auto;
+  box-sizing: border-box;
 `;
 
-const Menu = styled.div`
-  display: flex;
-  background: ${props => props.theme.backgroundColor.menu};
-  height: 70px;
-  align-items: center;
-`;
-
-const ItemLink = styled.div`
-  padding: 10px;
-  text-decoration: none;
-  text-transform: capitalize;
-
-  a {
-    color: white;
-    text-decoration: none;
-  }
-
-  .selected {
-    border-bottom: solid 2px white;
-  }
-`;
 class App extends Component {
   componentDidMount() {
     this.props.getAllCategories();
   };
-
-  renderCategories = () => {
-    const { categories } = this.props;
-
-    return Object.keys(categories).map((key) => {
-      return <ItemLink key={categories[key].name} >
-              <NavLink
-                exact
-                activeClassName="selected"
-                to={`/category/${categories[key].name}`}>
-                  {categories[key].name}
-              </NavLink>
-            </ItemLink>
-    })
-  }
   
   render() {
     return (
@@ -73,17 +39,9 @@ class App extends Component {
         <GlobalStyle />
         <Router>
           <div>
-            <Menu>
-              <Wrapper>
-                <ItemLink>
-                  <NavLink exact activeClassName="selected" to={`/`}>Home</NavLink>
-                </ItemLink>
-                {this.renderCategories()}
-                <ItemLink>
-                  <NavLink exact activeClassName="selected" to={`/new-post`}>New Post</NavLink>
-                </ItemLink>
-              </Wrapper>
-            </Menu>
+            <TheHeader
+              categories={this.props.categories}
+            />
 
             <Wrapper>
               <Switch>

@@ -6,7 +6,7 @@ export const breakpoints = {
 
 export const textColor = {
   links: "#4b4a4f",
-  linksHover: "#f60",
+  linksHover: "#03a87c",
   text: "#aaafc6",
   textDark: "#4b4a4f"
 };

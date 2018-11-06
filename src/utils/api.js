@@ -39,6 +39,7 @@ export const getComments = (id) => {
     .then(response => response.json())
 }
 
+
 export function updateCommentAPI(id, value) {
 
   return fetch(`${api}/comments/${id}`, {
@@ -67,7 +68,10 @@ export function newCommentAPI(params) {
   })
 }
 
-export function voteComment(id, value) {
+export function voteCommentAPI(id, value) {
+  const params = {
+    option: value
+  }
 
   return fetch(`${api}/comments/${id}`, {
     method: 'POST',
@@ -75,10 +79,7 @@ export function voteComment(id, value) {
       ...headers,
       "Content-Type": "application/json"
     },
-    body: JSON.stringify({
-      timestamp: Date.now(),
-      body: value
-    })
+    body: JSON.stringify(params)
   }).then((response) => response.json())
 }
 

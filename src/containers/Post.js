@@ -1,10 +1,16 @@
 import React, { Component } from 'react';
 import { connect } from "react-redux";
+import styled from "styled-components";
 import * as postActions from 'actions/posts';
 import * as commentsActions from 'actions/comments';
 import CardPost from "components/card-post";
 import CardComments from "components/card-comments";
 const uuidv4 = require('uuid/v4');
+
+
+const PostWrapper = styled.div`
+  width: 100%;
+`;
 
 class Post extends Component {
   state = {
@@ -39,13 +45,20 @@ class Post extends Component {
     const { post, comments } = this.props;
 
     return (
-      <div>
+      <PostWrapper>
         {post && <CardPost post={post} />}
+        
+        <div>
+          <span>Edit</span> |
+          <span>Delete</span>
+        </div>
+
         {comments && <CardComments
           updateValue={this.handleUpdateComment}
           insertNewComment={this.handleNewComment}
+          updateVoteComment={this.props.updateVote}
           comments={comments} />}
-      </div>
+      </PostWrapper>
     )
   }
 }

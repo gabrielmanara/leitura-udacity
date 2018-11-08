@@ -9,6 +9,7 @@ const Button = styled.button`
   border: 2px solid #03a87c;
   padding: 15px;
   border-radius: 5px;
+  cursor: pointer;
 `;
 
 export default class ButtonDefault extends Component {

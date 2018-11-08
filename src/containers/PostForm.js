@@ -77,7 +77,6 @@ class PostForm extends Component {
           updateInput={this.handleChange}
         />
 
-
         <ButtonDefault 
           handle={this.submitPost}
           title="I'm ready to publish"/>

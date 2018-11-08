@@ -5,6 +5,7 @@ import * as postActions from 'actions/posts';
 import * as commentsActions from 'actions/comments';
 import CardPost from "components/card-post";
 import CardComments from "components/card-comments";
+import PostForm from "containers/PostForm";
 const uuidv4 = require('uuid/v4');
 
 
@@ -15,7 +16,15 @@ const PostWrapper = styled.div`
 class Post extends Component {
   state = {
     post: [],
-    comments: []
+    comments: [],
+    editMode: false
+  }
+
+  handleEditMode = () => {
+    this.setState({
+      ...this.state,
+      editMode: !this.state.editMode
+    })
   }
 
   componentDidMount() {
@@ -28,6 +37,7 @@ class Post extends Component {
   }
 
   handleNewComment = (body) => {
+
     const { author, comment } = body;
 
     const params = {
@@ -43,13 +53,15 @@ class Post extends Component {
 
   render() {
     const { post, comments } = this.props;
+    const { editMode } = this.state;
 
     return (
       <PostWrapper>
-        {post && <CardPost post={post} />}
+        {post && !editMode && <CardPost post={post} />}
+        {post && editMode && <PostForm post={post} />}
         
         <div>
-          <span>Edit</span> |
+          <span onClick={() => this.handleEditMode()}>Edit</span> |
           <span>Delete</span>
         </div>
 

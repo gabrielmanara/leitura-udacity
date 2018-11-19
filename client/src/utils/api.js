@@ -10,16 +10,39 @@ const headers = {
   'Authorization': token
 }
 
-export const getPosts = () => {
+/**
+ * Get all posts
+ */
+export const getPostsAPI = () => {
   return fetch(`${api}/posts`, { headers })
     .then(response => response.json())
 }
 
-export const getPost = (id) => {
+
+/** Get single post
+ * @param  {int} id
+ */
+export const getPostAPI = (id) => {
   return fetch(`${api}/posts/${id}`, { headers })
     .then(response => response.json())
 }
 
+
+/** Delete a single post
+ * @param  {int} id
+ */
+export const deletePostAPI = (id) => {
+  return fetch(`${api}/posts/${id}`, {
+    method: 'DELETE',
+    headers: {
+      ...headers,
+      "Content-Type": "application/json"
+    }
+  }).then((response) => {
+    console.log(response)
+    return response.json()
+  })
+}
 export const newPostAPI = (post) => {
   return fetch(`${api}/posts`, {
     method: 'POST',
@@ -34,7 +57,7 @@ export const newPostAPI = (post) => {
   })
 }
 
-export const getComments = (id) => {
+export const getCommentsAPI = (id) => {
   return fetch(`${api}/posts/${id}/comments`, { headers })
     .then(response => response.json())
 }
@@ -84,11 +107,11 @@ export function voteCommentAPI(id, value) {
 }
 
 
-export const getCategories = () =>
+export const getCategoriesAPI = () =>
   fetch(`${api}/categories`, { headers })
     .then(response => response.json())
 
-export const vote = ({ id, vote }) =>
+export const voteAPI = ({ id, vote }) =>
   fetch(`${api}/posts/${id}`, {
     method: 'POST',
     headers: {

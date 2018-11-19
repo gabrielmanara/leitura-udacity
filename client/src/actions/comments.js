@@ -1,11 +1,11 @@
-import { getComments, updateCommentAPI, newCommentAPI, voteCommentAPI } from 'utils/api';
+import { getCommentsAPI, updateCommentAPI, newCommentAPI, voteCommentAPI } from 'utils/api';
 import { toObject } from 'utils/helpers';
 export const SET_COMMENTS = 'SET_COMMENTS';
 export const SET_COMMENT = 'SET_COMMENT';
 
 export function fetchComments(id) {
   return (dispatch) => {
-    return getComments(id)
+    return getCommentsAPI(id)
       .then((comments) => {
         dispatch(setAllComments(toObject(comments)));
       });

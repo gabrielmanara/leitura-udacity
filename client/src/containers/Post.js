@@ -27,6 +27,11 @@ class Post extends Component {
     })
   }
 
+  handleDelete = async() => {
+    await this.props.deletePost(this.props.match.params.id);
+    this.props.history.push(`/`);
+  }
+
   componentDidMount() {
     this.props.fetchPost(this.props.match.params.id);
     this.props.fetchComments(this.props.match.params.id);
@@ -37,7 +42,6 @@ class Post extends Component {
   }
 
   handleNewComment = (body) => {
-
     const { author, comment } = body;
 
     const params = {
@@ -62,7 +66,7 @@ class Post extends Component {
         
         <div>
           <span onClick={() => this.handleEditMode()}>Edit</span> |
-          <span>Delete</span>
+          <span onClick={() => this.handleDelete()}>Delete</span>
         </div>
 
         {comments && <CardComments

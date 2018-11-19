@@ -1,12 +1,13 @@
-import { getPosts, vote, getPost, newPostAPI } from 'utils/api';
+import { getPostsAPI, voteAPI, getPostAPI, newPostAPI, deletePostAPI } from 'utils/api';
 import { toObject } from 'utils/helpers';
 export const SET_ALL_POSTS = 'SET_ALL_POSTS';
 export const SET_POST = 'SET_POST';
 export const VOTE_POST = 'VOTE_POST';
+export const UPDATE_POST = 'UPDATE_POST';
 
 export function fetchAllPosts() {
   return (dispatch) => {
-    return getPosts()
+    return getPostsAPI()
       .then((posts) => {
       
         dispatch(setAllPosts(toObject(posts)));
@@ -16,7 +17,7 @@ export function fetchAllPosts() {
 
 export function fetchPost(id) {
   return (dispatch) => {
-    return getPost(id)
+    return getPostAPI(id)
       .then((post) => {
         dispatch(setPost(post));
       });
@@ -34,9 +35,18 @@ export function newPost(post) {
 
 export function handleVote(param) {
   return (dispatch) => {
-    return vote(param)
+    return voteAPI(param)
       .then((e) => {
         dispatch(votePost(param));
+      })
+  }
+}
+
+export function deletePost(id) {
+  return (dispatch) => {
+    return deletePostAPI(id)
+      .then((post) => {
+        dispatch(updatePost(post));
       })
   }
 }
@@ -50,6 +60,11 @@ export const setAllPosts = allPosts => ({
 
 export const setPost = post => ({
   type: SET_POST,
+  post
+});
+
+export const updatePost = post => ({
+  type: UPDATE_POST,
   post
 });
 

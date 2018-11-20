@@ -75,6 +75,7 @@ class Post extends Component {
     }
 
     this.props.newComment(params);
+    this.props.commentCounter(true)
   }
 
   votePost = (type, id) => {

@@ -3,7 +3,8 @@ import {
   SET_POST,
   VOTE_POST,
   UPDATE_POST,
-  DELETED_POST
+  DELETED_POST,
+  COMMENT_COUNTER
 } from 'actions/posts';
 import { isEmpty } from "lodash";
 
@@ -24,6 +25,9 @@ export default function posts(state = initialState, action) {
       };
     case VOTE_POST:
       return vote(state, action);
+    
+    case COMMENT_COUNTER:
+      return commentCounter(state, action);
 
     case SET_POST:
       return post(state, action);
@@ -102,5 +106,22 @@ function vote(state = {}, action) {
       }
     default:
       return state
+  }
+}
+
+function commentCounter(state = {}, action) {
+  let counter = state.post.commentCount;
+  counter = action.param ? counter + 1 : counter - 1;
+
+  switch (action.type) {
+    case COMMENT_COUNTER: {
+      return {
+        ...state,
+        post: {
+          ...state.post,
+          commentCount: counter
+        }
+      };
+    }
   }
 }

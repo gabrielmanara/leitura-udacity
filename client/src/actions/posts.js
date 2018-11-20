@@ -10,6 +10,7 @@ export const SET_POST = 'SET_POST';
 export const VOTE_POST = 'VOTE_POST';
 export const UPDATE_POST = 'UPDATE_POST';
 export const DELETED_POST = 'DELETED_POST';
+export const COMMENT_COUNTER = 'COMMENT_COUNTER';
 
 export function fetchAllPosts() {
   return (dispatch) => {
@@ -97,4 +98,9 @@ export const votePost = ({id, vote}) => ({
   type: VOTE_POST,
   vote,
   id
+});
+
+export const commentCounter = param => ({
+  type: COMMENT_COUNTER,
+  param
 });

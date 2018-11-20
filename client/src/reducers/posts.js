@@ -2,7 +2,8 @@ import {
   SET_ALL_POSTS,
   SET_POST,
   VOTE_POST,
-  UPDATE_POST
+  UPDATE_POST,
+  DELETED_POST
 } from 'actions/posts';
 
 const initialState = {
@@ -47,11 +48,19 @@ function post(state = {}, action) {
     case UPDATE_POST:
       return {
         ...state,
+        post: {
+          ...post
+        },
+      };
+
+    case DELETED_POST:
+      return {
+        ...state,
         allPosts: {
           [post.id]: {
             ...post
           }
-        }
+        },
       };
   
     default:

@@ -27,8 +27,8 @@ export const getPostAPI = (id) => {
     .then(response => response.json())
 }
 
-
-/** Delete a single post
+/** 
+ * Delete a single post
  * @param  {int} id
  */
 export const deletePostAPI = (id) => {
@@ -43,6 +43,25 @@ export const deletePostAPI = (id) => {
     return response.json()
   })
 }
+
+/**
+ * @param  {int} id
+ * @param  {object} post
+ */
+export const updatePostAPI = (id, post) => {
+  return fetch(`${api}/posts/${id}`, {
+    method: 'PUT',
+    headers: {
+      ...headers,
+      "Content-Type": "application/json"
+    },
+    title: post.title,
+    body: JSON.stringify(post)
+  }).then((response) => {
+    return response.json()
+  })
+}
+
 export const newPostAPI = (post) => {
   return fetch(`${api}/posts`, {
     method: 'POST',

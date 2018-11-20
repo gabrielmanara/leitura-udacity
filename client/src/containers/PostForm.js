@@ -5,6 +5,7 @@ import { connect } from "react-redux";
 import * as categoriesActions from 'actions/categories';
 import * as postsActions from 'actions/posts';
 import ButtonDefault from "components/btn-default";
+import { isNil } from "lodash";
 const uuidv4 = require('uuid/v4');
 
 const Form = styled.div`
@@ -20,6 +21,10 @@ class PostForm extends Component {
 
   componentDidMount() {
     this.props.getAllCategories();
+    
+    this.setState({
+      ...this.props.post
+    })
   }
 
   handleChange = (value, name) => {
@@ -28,14 +33,24 @@ class PostForm extends Component {
     })
   }
 
-  submitPost = () => {
-    const id = uuidv4();
-    this.props.newPost({
-      ...this.state,
-      id: id,
-      timestamp: Date.now()
-    }).then(() => {
-      this.props.history.push(`/posts/${id}`)
+  submitPost = async() => {
+    // If new post
+    if (isNil(this.props.handleUpdate)) {
+      const id = uuidv4();
+      
+      return this.props.newPost({
+        ...this.state,
+        id: id,
+        timestamp: Date.now()
+      }).then(() => {
+        this.props.history.push(`/posts/${id}`)
+      });
+    }
+
+    // if not update the existing 
+    const id = this.props.post.id;
+    return this.props.handleUpdatePost(id, this.state).then(() => {
+      this.props.handleUpdate();
     })
   }
 

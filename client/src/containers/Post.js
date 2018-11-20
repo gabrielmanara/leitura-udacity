@@ -13,6 +13,19 @@ const PostWrapper = styled.div`
   width: 100%;
 `;
 
+const ActionPost = styled.div`
+  padding-bottom: 20px;
+
+  span {
+    cursor: pointer;
+    padding: 0 5px;
+
+    &:first-of-type {
+      padding-left: 0;
+    }
+  }
+`;
+
 class Post extends Component {
   state = {
     post: [],
@@ -62,14 +75,16 @@ class Post extends Component {
     return (
       <PostWrapper>
         {post && !editMode && <CardPost post={post} />}
-        {post && editMode && <PostForm post={post} />}
+        {post && editMode && <PostForm handleUpdate={() => this.handleEditMode()} post={post} />}
         
-        <div>
-          <span onClick={() => this.handleEditMode()}>Edit</span> |
-          <span onClick={() => this.handleDelete()}>Delete</span>
-        </div>
+        {!editMode &&
+          <ActionPost>
+            <span onClick={() => this.handleEditMode()}>Edit</span> |
+            <span onClick={() => this.handleDelete()}>Delete</span>
+          </ActionPost>
+        }
 
-        {comments && <CardComments
+        {!editMode && comments && <CardComments
           updateValue={this.handleUpdateComment}
           insertNewComment={this.handleNewComment}
           updateVoteComment={this.props.updateVote}

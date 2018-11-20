@@ -22,6 +22,10 @@ export default class InputComment extends Component {
 
   handleSubmit = () => {
     this.props.insertNewComment(this.state);
+    this.setState({
+      author: "",
+      comment: ""
+    })
   }
 
   render() {
@@ -32,11 +36,13 @@ export default class InputComment extends Component {
           <input 
             name="author" 
             type="text"
+            value={this.state.author}
             onChange={event => this.handleInput("author", event.target.value)}  />
         </FormGroup>
         <FormGroup>
           <label htmlFor="comment">Comment</label>
           <textarea 
+            value={this.state.comment}
             onChange={event => this.handleInput("comment", event.target.value)}>
           </textarea>
         </FormGroup>

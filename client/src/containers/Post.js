@@ -110,11 +110,13 @@ class Post extends Component {
           </ActionPost>
         }
 
-        {!editMode && comments && <CardComments
-          updateValue={this.handleUpdateComment}
-          insertNewComment={this.handleNewComment}
-          updateVoteComment={this.props.updateVote}
-          comments={comments} />}
+        {!editMode && 
+          comments && 
+          <CardComments
+            updateValue={this.handleUpdateComment}
+            insertNewComment={this.handleNewComment}
+            updateVoteComment={this.props.updateVote}
+            comments={comments} />}
       </PostWrapper>
     )
   }

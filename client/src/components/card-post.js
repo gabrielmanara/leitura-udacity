@@ -26,6 +26,7 @@ export default class CardPost extends Component {
           <span>{post.author}</span>
           <span> | </span>
           <span>{post.timestamp && converDate(post.timestamp)}</span>
+          <span> with {post.voteScore} votes</span>
         </InfoWrapper>
         <Text>{post.body}</Text>
       </article>

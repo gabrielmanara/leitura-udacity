@@ -6,6 +6,7 @@ import * as commentsActions from 'actions/comments';
 import CardPost from "components/card-post";
 import CardComments from "components/card-comments";
 import PostForm from "containers/PostForm";
+import { FaRegGrinBeam, FaRegFrown } from 'react-icons/fa';
 const uuidv4 = require('uuid/v4');
 
 
@@ -15,14 +16,22 @@ const PostWrapper = styled.div`
 
 const ActionPost = styled.div`
   padding-bottom: 20px;
+  display: flex;
+  cursor: pointer;
 
   span {
+    display: flex;
+    align-items: center;
     cursor: pointer;
     padding: 0 5px;
 
     &:first-of-type {
       padding-left: 0;
     }
+  }
+
+  svg {
+    margin-right: 10px;
   }
 `;
 
@@ -68,19 +77,36 @@ class Post extends Component {
     this.props.newComment(params);
   }
 
+  votePost = (type, id) => {
+    this.props.handleVote({
+      id: id,
+      vote: { option: type }
+    })
+  }
+
   render() {
     const { post, comments } = this.props;
     const { editMode } = this.state;
 
     return (
       <PostWrapper>
-        {post && !editMode && <CardPost post={post} />}
-        {post && editMode && <PostForm handleUpdate={() => this.handleEditMode()} post={post} />}
+        { post && 
+        !editMode && 
+        <CardPost post={post} /> }
+
+        { post && 
+          editMode && 
+          <PostForm 
+            handleUpdate={() => this.handleEditMode()} 
+            post={post} /> }
         
         {!editMode &&
           <ActionPost>
             <span onClick={() => this.handleEditMode()}>Edit</span> |
             <span onClick={() => this.handleDelete()}>Delete</span>
+
+            <span onClick={() => this.votePost("upVote", post.id)}><FaRegGrinBeam />Like</span>
+            <span onClick={() => this.votePost("downVote", post.id)}><FaRegFrown /> Dislike</span>
           </ActionPost>
         }
 

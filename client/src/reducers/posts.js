@@ -5,6 +5,7 @@ import {
   UPDATE_POST,
   DELETED_POST
 } from 'actions/posts';
+import isEmpty from "lodash";
 
 const initialState = {
   allPosts: []
@@ -71,16 +72,33 @@ function post(state = {}, action) {
 function vote(state = {}, action) {
   switch (action.type) {
     case VOTE_POST:
-      let score = state.allPosts[action.id].voteScore;
+
+      // Check if operation will be in state of allPost (List of all)
+      // or in single post (Details page)
+      if (!isEmpty(state.allPosts)) {
+        let score = state.allPosts[action.id].voteScore;
+        score = action.vote.option === 'upVote' ? score + 1 : score - 1;
+
+        return {
+          ...state,
+          allPosts: {
+            ...state.allPosts,
+            [action.id]: {
+              ...state.allPosts[action.id],
+              voteScore: score
+            }
+          }
+        }
+      }
+
+      let score = state.post.voteScore;
       score = action.vote.option === 'upVote' ? score + 1 : score - 1;
+
       return {
         ...state,
-        allPosts: {
-          ...state.allPosts,
-          [action.id]: {
-            ...state.allPosts[action.id],
-            voteScore: score
-          }
+        post: {
+          ...state.post,
+          voteScore: score
         }
       }
     default:

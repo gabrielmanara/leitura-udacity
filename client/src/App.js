@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import styled, { createGlobalStyle } from 'styled-components';
-import Posters from "containers/Posters";
+import Posts from "containers/Posts";
 import Post from "containers/Post";
 import PostForm from "containers/PostForm";
 import styledNormalize from 'styled-normalize';
@@ -45,9 +45,9 @@ class App extends Component {
 
             <Wrapper>
               <Switch>
-                <Route exact path="/" component={Posters} />
+                <Route exact path="/" component={Posts} />
                 <Route exact path={`/category/:category`} render={(props) => (
-                  <Posters {...props}/>
+                  <Posts {...props}/>
                 )} />
                 <Route exact path="/posts/:id" component={Post} />
                 <Route exact path="/new-post" component={PostForm} />

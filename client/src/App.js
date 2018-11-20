@@ -28,6 +28,12 @@ const Wrapper = styled.div`
   box-sizing: border-box;
 `;
 
+const NoMatch = ({ location }) => (
+  <div>
+    <h3>Page not found <code>{location.pathname}</code></h3>
+  </div>
+)
+
 class App extends Component {
   componentDidMount() {
     this.props.getAllCategories();
@@ -47,10 +53,12 @@ class App extends Component {
               <Switch>
                 <Route exact path="/new-post" component={PostForm} />
                 <Route exact path="/" component={Posts} />
-                <Route exact path={`/:category`} render={(props) => (
+                <Route exact path="/:category/:id" component={Post} />
+                <Route path="/:category" render={(props) => (
                   <Posts {...props}/>
                 )} />
-                <Route exact path="/:category/:id" component={Post} />
+
+                <Route component={NoMatch} />
               </Switch>
             </Wrapper>
             

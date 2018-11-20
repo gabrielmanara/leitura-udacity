@@ -8,7 +8,7 @@ Readable is a project from Udacity nanodegree that consist in implement a blog-p
 To get started developing right away:
 
 * Install and start the API server
-    - `cd server/api-server`
+    - `cd backend/api-server`
     - `npm install`
     - `node server`
 * In another terminal window
@@ -22,4 +22,4 @@ Information about the Client [Create React App](https://github.com/facebook/crea
 
 ## API Server
 
-Information about the API server and how to use it can be found in its [README file](server/api-server/README.md).
+Information about the API server and how to use it can be found in its [README file](backend/api-server/README.md).

@@ -45,12 +45,12 @@ class App extends Component {
 
             <Wrapper>
               <Switch>
+                <Route exact path="/new-post" component={PostForm} />
                 <Route exact path="/" component={Posts} />
                 <Route exact path={`/:category`} render={(props) => (
                   <Posts {...props}/>
                 )} />
                 <Route exact path="/:category/:id" component={Post} />
-                <Route exact path="/new-post" component={PostForm} />
               </Switch>
             </Wrapper>
             

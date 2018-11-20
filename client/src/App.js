@@ -49,7 +49,7 @@ class App extends Component {
                 <Route exact path={`/:category`} render={(props) => (
                   <Posts {...props}/>
                 )} />
-                <Route exact path="/posts/:id" component={Post} />
+                <Route exact path="/:category/:id" component={Post} />
                 <Route exact path="/new-post" component={PostForm} />
               </Switch>
             </Wrapper>

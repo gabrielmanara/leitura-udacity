@@ -59,7 +59,7 @@ export default class Card extends Component {
     return (
       <Post>
         <Title>
-          <Link href={`/posts/${post.id}`}>{post.title}</Link>
+          <Link href={`/${post.category}/${post.id}`}>{post.title}</Link>
           <Vote
             id={post.id} 
             handleClick={this.props.votePost} />

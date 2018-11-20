@@ -46,7 +46,7 @@ class App extends Component {
             <Wrapper>
               <Switch>
                 <Route exact path="/" component={Posts} />
-                <Route exact path={`/category/:category`} render={(props) => (
+                <Route exact path={`/:category`} render={(props) => (
                   <Posts {...props}/>
                 )} />
                 <Route exact path="/posts/:id" component={Post} />

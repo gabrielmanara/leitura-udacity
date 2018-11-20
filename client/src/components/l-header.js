@@ -41,7 +41,7 @@ export default class TheHeader extends Component {
         <NavLink
           exact
           activeClassName="selected"
-          to={`/category/${categories[key].name}`}>
+          to={`/${categories[key].name}`}>
           {categories[key].name}
         </NavLink>
       </ItemLink>

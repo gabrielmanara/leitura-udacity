@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import styled from "styled-components";
 import { converDate } from "utils/helpers";
-import { FaSave, FaEdit } from 'react-icons/fa';
+import { FaSave, FaEdit, FaTimesCircle } from 'react-icons/fa';
 
 const CommentTitle = styled.div`
   margin-bottom: 10px;
@@ -67,6 +67,8 @@ export default class CardComment extends Component {
           {comment.author} at {converDate(comment.timestamp)} with {comment.voteScore} votes
           {!editMode && <EditMode onClick={() => this.handleEditMode()}><FaEdit/> Edit</EditMode>}
           {editMode && <EditMode onClick={() => this.saveComment()}><FaSave/> Save</EditMode>}
+          {editMode && <EditMode onClick={() => this.handleEditMode()}><FaTimesCircle/> Cancel</EditMode>}
+
 
         </CommentTitle>
         {!editMode && <CommentBody>{comment.body}</CommentBody>}

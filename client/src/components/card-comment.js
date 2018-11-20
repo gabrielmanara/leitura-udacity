@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import styled from "styled-components";
 import { converDate } from "utils/helpers";
-import { FaSave, FaEdit, FaTimesCircle } from 'react-icons/fa';
+import { FaSave, FaEdit, FaTimesCircle, FaTrash } from 'react-icons/fa';
 
 const CommentTitle = styled.div`
   margin-bottom: 10px;
@@ -57,6 +57,10 @@ export default class CardComment extends Component {
     });
   }
 
+  deleteComment = (id) => {
+    this.props.deleteComment(id);
+  }
+
   render() {
     const { comment } = this.props;
     const { editMode, value } = this.state;
@@ -66,6 +70,8 @@ export default class CardComment extends Component {
         <CommentTitle>
           {comment.author} at {converDate(comment.timestamp)} with {comment.voteScore} votes
           {!editMode && <EditMode onClick={() => this.handleEditMode()}><FaEdit/> Edit</EditMode>}
+          {!editMode && <EditMode onClick={() => this.deleteComment(comment.id)}><FaTrash/> Delete</EditMode>}
+
           {editMode && <EditMode onClick={() => this.saveComment()}><FaSave/> Save</EditMode>}
           {editMode && <EditMode onClick={() => this.handleEditMode()}><FaTimesCircle/> Cancel</EditMode>}
 

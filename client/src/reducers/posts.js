@@ -123,5 +123,7 @@ function commentCounter(state = {}, action) {
         }
       };
     }
+    default:
+      return state;
   }
 }

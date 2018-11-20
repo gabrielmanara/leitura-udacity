@@ -71,7 +71,6 @@ export const newPostAPI = (post) => {
     },
     body: JSON.stringify(post)
   }).then((response) => {
-    console.log(response)
     return response.json()
   })
 }
@@ -79,6 +78,18 @@ export const newPostAPI = (post) => {
 export const getCommentsAPI = (id) => {
   return fetch(`${api}/posts/${id}/comments`, { headers })
     .then(response => response.json())
+}
+
+export const deleteCommentAPI = (id) => {
+  return fetch(`${api}/comments/${id}`, {
+    method: 'DELETE',
+    headers: {
+      ...headers,
+      "Content-Type": "application/json"
+    }
+  }).then((response) => {
+    return response.json()
+  })
 }
 
 

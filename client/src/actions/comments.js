@@ -1,7 +1,12 @@
-import { getCommentsAPI, updateCommentAPI, newCommentAPI, voteCommentAPI } from 'utils/api';
+import { getCommentsAPI, 
+          updateCommentAPI,
+          newCommentAPI,
+          deleteCommentAPI,
+          voteCommentAPI } from 'utils/api';
 import { toObject } from 'utils/helpers';
 export const SET_COMMENTS = 'SET_COMMENTS';
 export const SET_COMMENT = 'SET_COMMENT';
+export const DELETE_COMMENT = 'DELETE_COMMENT';
 
 export function fetchComments(id) {
   return (dispatch) => {
@@ -39,10 +44,24 @@ export function newComment(params) {
   }
 }
 
+export function handleDeleteComment(id) {
+  return (dispatch) => {
+    return deleteCommentAPI(id)
+      .then((comment) => {
+        dispatch(deleteComment(comment));
+      });
+  }
+}
+
 // Actions
 export const setAllComments = comments => ({
   type: SET_COMMENTS,
   comments
+});
+
+export const deleteComment = comment => ({
+  type: DELETE_COMMENT,
+  comment
 });
 
 export const setComment = comment => ({

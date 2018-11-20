@@ -8,7 +8,7 @@ import { connect } from "react-redux";
 import * as actionCreators from 'actions/categories';
 import TheHeader from "components/l-header";
 
-import { BrowserRouter as Router, Route, NavLink, Switch } from "react-router-dom";
+import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 
 const GlobalStyle = createGlobalStyle`
   ${styledNormalize}

@@ -78,6 +78,11 @@ class Post extends Component {
     this.props.commentCounter(true)
   }
 
+  deleteComment = (id) => {
+    this.props.handleDeleteComment(id);
+    this.props.commentCounter(false);
+  }
+
   votePost = (type, id) => {
     this.props.handleVote({
       id: id,
@@ -116,6 +121,7 @@ class Post extends Component {
           <CardComments
             updateValue={this.handleUpdateComment}
             insertNewComment={this.handleNewComment}
+            deleteComment={this.deleteComment}
             updateVoteComment={this.props.updateVote}
             comments={comments} />}
       </PostWrapper>

@@ -37,6 +37,10 @@ export default class Comments extends Component {
     this.props.updateValue(value, id)
   }
 
+  deleteComment = (id) => {
+    this.props.deleteComment(id);
+  }
+
   insertNewComment = (body) => {
     this.props.insertNewComment(body);
   }
@@ -54,6 +58,7 @@ export default class Comments extends Component {
           return (<CommentWrapper key={key}>
             <CardComment
               updateComment={this.updateComment}
+              deleteComment={this.deleteComment}
               comment={comments[key]} />
               
               <ActionWrapper>
